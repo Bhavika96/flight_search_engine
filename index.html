@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Flight Search</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="main.js"></script>
+
+	
+</head>
+<body>
+
+	<!-- <header>
+		<div class="container">
+			<h1>Flight Search</h1>
+		</div>
+	</header> -->
+	<section>
+		<div class="container">
+			<div class="outer-box">
+				<h1>Flight Search Engine</h1>
+				<div class="inner-box">
+					<div class="left-section">
+						<div class="flight-logo"></div>
+						<div class="form-section">
+							<form>
+								<div class="form-group radio-btn">
+									  <input type="radio" name="travel_type" value="oneway" id="oneway" checked onchange="returntrip();">
+									  <label for="oneway">One Way</label>
+									  <input type="radio" name="travel_type" value="return" id="return" onchange="returntrip()">
+									  <label for="return">Return Trip</label>
+								</div>
+								<div class="form-group">
+									<div class="half-sec">
+										<label for="from">Flying from</label>
+										<select id="from" class="form-control" required>
+											<option value="" disabled selected hidden>Select from</option>
+											<option value="PNQ">Pune - PNQ</option>
+											<option value="DEL">Delhi - DEL</option>
+											<option value="BLR">Bangalore - BLR</option>
+											<option value="PUN">Pune - PUN</option>
+											<option value="KOL">Kolkatta - KOL</option>
+										</select>
+									</div>
+									<div class="half-sec">
+										<label for="to">Flying to</label>
+										<select id="to" class="form-control" required>
+											<option value="" disabled selected hidden>Select to</option>
+											<option value="PNQ">Pune - PNQ</option>
+											<option value="DEL">Delhi - DEL</option>
+											<option value="BLR">Bangalore - BLR</option>
+											<option value="PUN">Pune - PUN</option>
+											<option value="KOL">Kolkatta - KOL</option>
+										</select>
+									</div>
+									<br class="clear">
+								</div>
+
+								<div class="form-group">
+									<div class="half-sec">
+										<label for="ondate">Departure</label>
+										<input type="date" id="ondate" name="ondate" class="form-control" required>
+									</div>
+									<div class="half-sec" id="roundtrip" style="display:none">
+										<label for="returndate">Return</label>
+										<input type="date" id="returndate" name="returndate" class="form-control">
+									</div>
+									<br class="clear">
+								</div>
+
+								<div class="form-group">
+									<label for="passengers">No. of Passengers</label>
+									<select id="passengers" class="form-control" required>
+										<option value="" disabled selected hidden>Passengers</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+
+								<div class="form-group" id="slider-range">
+									<label>Price Range</label>
+									<div class="range">
+								        <input class="range" type="range" value="0" min="2000" max="20000" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></input>
+									</div>
+									<span id="amount">0</span>
+								</div>
+
+								<button type="submit"  id="search-flights">Submit</button>
+
+							</form>
+						</div>
+					</div>
+					<div class="right-section">
+						<div class="selection-box">
+							<h4 class="title">Your Selection</h4>
+							<div class="row d-flex">
+								<div class="col border-right">
+									<div class="info-box">
+										<span class="d-block"><i class="fa fa-plane text-grey"></i> <small>AI-202</small></span>
+										<p class="date">27 Apr 22<small class="text-grey d-block">(Departure)</small></p>
+										<h5>Delhi <i class="fa fa-long-arrow-right"></i> Pune</h5>
+										<p class="time">2h 20<small>&nbsp;(Non Stop)</small></p>
+									</div>
+								</div>
+								<div class="col border-right">
+									<div class="info-box">
+										<span class="d-block"><i class="fa fa-plane text-grey"></i> <small>AI-207</small></span>
+										<p class="date">06 May 22<small class="text-grey d-block">(Return)</small></p>
+										<h5>Pune <i class="fa fa-long-arrow-right"></i> Delhi  <span></span></h5>
+										<p class="time">2h 05<small>&nbsp;(Non Stop)</small></p>
+									</div>
+								</div>
+								<div class="col text-right">
+									<h3 class="d-inline-block">₹ 14,627</h3>
+									<a href="#" class="btn-book">Book</a>
+								</div>
+							</div>
+						</div>
+
+						<table class="white-bg half mr-5" width="50%">
+							<tr>
+								<td colspan="3"><span><i class="fa fa-plane text-grey"></i> <small>AI-202</small></span></td>
+							</tr>
+							<tr>
+								<td style="width: 25px;"><small class="text-grey">DEL</small><br><strong>04:50</strong></td>
+								<td style="width: 40px;"><small>2h 20<small><br><small>Non Stop</small></td>
+								<td style="width: 25px;"><small class="text-grey">PNQ</small><br><strong>07:10</strong></td>
+								<td style="width: 5px;" class="text-right"><span class="d-block">₹7308</span><span class="badge selected">Selected</span></td>
+							</tr>
+						</table>
+
+						<table class="white-bg half ml-5" width="50%">
+							<tr>
+								<td colspan="3"><span><i class="fa fa-plane text-grey"></i> <small>AI-203</small></span></td>
+							</tr>
+							<tr>
+								<td style="width: 25px;"><small class="text-grey">PNQ</small><br><strong>02:00</strong></td>
+								<td style="width: 40px;"><small>3h 10<small><br><small>1 Stop</small></td>
+								<td style="width: 25px;"><small class="text-grey">DEL</small><br><strong>05:10</strong></td>
+								<td style="width:5px;" class="text-right"><span class="d-block">₹7319</span><span class="badge">Select</span></td>
+							</tr>
+						</table>
+						<br class="clear">
+
+						<table class="white-bg half mr-5" width="50%">
+							<tr>
+								<td colspan="3"><span><i class="fa fa-plane text-grey"></i> <small>AI-204</small></span></td>
+							</tr>
+							<tr>
+								<td style="width: 25px;"><small class="text-grey">DEL</small><br><strong>06:05</strong></td>
+								<td style="width: 40px;"><small>2h 05<small><br><small>Non Stop</small></td>
+								<td style="width: 25px;"><small class="text-grey">PNQ</small><br><strong>08:15</strong></td>
+								<td style="width: 5px;" class="text-right"><span class="d-block">₹7308</span><span class="badge">Select</span></td>
+							</tr>
+						</table>
+
+						<table class="white-bg half ml-5" width="50%">
+							<tr>
+								<td colspan="3"><span><i class="fa fa-plane text-grey"></i> <small>AI-205</small></span></td>
+							</tr>
+							<tr>
+								<td style="width: 25px;"><small class="text-grey">PNQ</small><br><strong>06:30</strong></td>
+								<td style="width: 40px;"><small>2h 05<small><br><small>Non Stop</small></td>
+								<td style="width: 25px;"><small class="text-grey">DEL</small><br><strong>08:35</strong></td>
+								<td style="width: 5px;" class="text-right"><span class="d-block">₹8579</span><span class="badge">Select</span></td>
+							</tr>
+						</table>
+						<br class="clear">
+
+						<table class="white-bg half mr-5" width="50%">
+							<tr>
+								<td colspan="3"><span><i class="fa fa-plane text-grey"></i> <small>AI-206</small></span></td>
+							</tr>
+							<tr>
+								<td style="width: 25px;"><small class="text-grey">DEL</small><br><strong>7:45</strong></td>
+								<td style="width: 40px;"><small>2h 15<small><br><small>Non Stop</small></td>
+								<td style="width: 25px;"><small class="text-grey">PNQ</small><br><strong>10:00</strong></td>
+								<td style="width: 5px;" class="text-right"><span class="d-block">₹7308</span><span class="badge">Select</span></td>
+							</tr>
+						</table>
+
+						<table class="white-bg half ml-5" width="50%">
+							<tr>
+								<td colspan="3"><span><i class="fa fa-plane text-grey"></i> <small>AI-207</small></span></td>
+							</tr>
+							<tr>
+								<td style="width: 25px;"><small class="text-grey">PNQ</small><br><strong>7:20</strong></td>
+								<td style="width: 40px;"><small>2h 05<small><br><small>Non Stop</small></td>
+								<td style="width: 25px;"><small class="text-grey">DEL</small><br><strong>09:25</strong></td>
+								<td style="width: 5px;" class="text-right"><span class="d-block">₹7319</span><span class="badge selected">Selected</span></td>
+							</tr>
+						</table>
+						<br class="clear">
+
+
+					</div>
+					<br class="clear">
+				</div>
+			</div>
+		</div>
+	</section>
+	<footer></footer>
+
+</body>
+</html>
+
+
