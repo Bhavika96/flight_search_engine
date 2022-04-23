@@ -7,6 +7,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="main.js"></script>
 
@@ -27,7 +28,7 @@
 					<div class="left-section">
 						<div class="flight-logo"></div>
 						<div class="form-section">
-							<form>
+							<form name="travel_form" onsubmit="return check()" id="travel_form">
 								<div class="form-group radio-btn">
 									  <input type="radio" name="travel_type" value="oneway" id="oneway" checked onchange="returntrip();">
 									  <label for="oneway">One Way</label>
@@ -37,24 +38,24 @@
 								<div class="form-group">
 									<div class="half-sec">
 										<label for="from">Flying from</label>
-										<select id="from" class="form-control" required>
+										<select id="from" class="form-control" name="flying_from">
 											<option value="" disabled selected hidden>Select from</option>
 											<option value="PNQ">Pune - PNQ</option>
 											<option value="DEL">Delhi - DEL</option>
 											<option value="BLR">Bangalore - BLR</option>
 											<option value="PUN">Pune - PUN</option>
-											<option value="KOL">Kolkatta - KOL</option>
+											<option value="KOL">Kolkata - KOL</option>
 										</select>
 									</div>
 									<div class="half-sec">
 										<label for="to">Flying to</label>
-										<select id="to" class="form-control" required>
+										<select id="to" class="form-control" name="flying_to">
 											<option value="" disabled selected hidden>Select to</option>
 											<option value="PNQ">Pune - PNQ</option>
 											<option value="DEL">Delhi - DEL</option>
 											<option value="BLR">Bangalore - BLR</option>
 											<option value="PUN">Pune - PUN</option>
-											<option value="KOL">Kolkatta - KOL</option>
+											<option value="KOL">Kolkata - KOL</option>
 										</select>
 									</div>
 									<br class="clear">
@@ -63,7 +64,7 @@
 								<div class="form-group">
 									<div class="half-sec">
 										<label for="ondate">Departure</label>
-										<input type="date" id="ondate" name="ondate" class="form-control" required>
+										<input type="date" id="ondate" name="ondate" class="form-control" onclick="currdate();">
 									</div>
 									<div class="half-sec" id="roundtrip" style="display:none">
 										<label for="returndate">Return</label>
@@ -74,7 +75,7 @@
 
 								<div class="form-group">
 									<label for="passengers">No. of Passengers</label>
-									<select id="passengers" class="form-control" required>
+									<select id="passengers" class="form-control" name="passengers">
 										<option value="" disabled selected hidden>Passengers</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -92,34 +93,34 @@
 									<span id="amount">0</span>
 								</div>
 
-								<button type="submit"  id="search-flights">Submit</button>
+								<button type="submit" id="search-flights" onclick ="validateform(); return false">Submit</button>
 
 							</form>
 						</div>
 					</div>
 					<div class="right-section">
 						<div class="selection-box">
-							<h4 class="title">Your Selection</h4>
+							<h4 class="title">Your Selection<span style="float: right;">Passengers:&nbsp;<span id="pass"></span></span></h4>
 							<div class="row d-flex">
 								<div class="col border-right">
 									<div class="info-box">
 										<span class="d-block"><i class="fa fa-plane text-grey"></i> <small>AI-202</small></span>
-										<p class="date">27 Apr 22<small class="text-grey d-block">(Departure)</small></p>
-										<h5>Delhi <i class="fa fa-long-arrow-right"></i> Pune</h5>
+										<p class="date"><span id="departure_date"></span><small class="text-grey d-block">(Departure)</small></p>
+										<h5><span id ="departure_city"></span> <i class="fa fa-long-arrow-right"></i> <span id ="return_city"></span></h5>
 										<p class="time">2h 20<small>&nbsp;(Non Stop)</small></p>
 									</div>
 								</div>
 								<div class="col border-right">
 									<div class="info-box">
 										<span class="d-block"><i class="fa fa-plane text-grey"></i> <small>AI-207</small></span>
-										<p class="date">06 May 22<small class="text-grey d-block">(Return)</small></p>
-										<h5>Pune <i class="fa fa-long-arrow-right"></i> Delhi  <span></span></h5>
+										<p class="date"><span id="return_date"></span><small class="text-grey d-block">(Return)</small></p>
+										<h5> <span id ="return_place"></span><i class="fa fa-long-arrow-right"></i> <span id ="departure_place"></h5>
 										<p class="time">2h 05<small>&nbsp;(Non Stop)</small></p>
 									</div>
 								</div>
 								<div class="col text-right">
 									<h3 class="d-inline-block">₹ 14,627</h3>
-									<a href="#" class="btn-book">Book</a>
+									<a href="#" class="btn-book" onclick="booking_confirm();">Book</a>
 								</div>
 							</div>
 						</div>
